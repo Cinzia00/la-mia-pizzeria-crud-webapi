@@ -1,0 +1,14 @@
+﻿@* @{
+    Layout = "_Layout";
+}
+
+@model Pizza
+
+    <div class="container-pizza text-center">
+        <div>
+            <img width="400" src="@Model.Image" alt="Foto pizza">
+            <h5 class="py-5 text-success text-uppercase">@Model.Nome</h5>
+            <p>@Model.Descrizione</p>
+            <p>€ @Model.Prezzo</p>
+    </div>
+ *@

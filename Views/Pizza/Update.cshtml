@@ -1,0 +1,64 @@
+﻿@model PizzaFormModel
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex align-items-center">
+                <h1 class="mt-3 mb-3">Modifica post</h1>
+            </div>
+            <form asp-controller="Pizza" asp-action="Update" asp-route-id="@Model.Pizza.Id" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" asp-for="Pizza.Id" />
+                <div class="mb-3">
+                    <strong>Nome:</strong>
+                    <input asp-for="Pizza.Nome" class="d-block w-100" />
+                    <span asp-validation-for="Pizza.Nome" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <strong>Descrizione:</strong>
+                    <textarea asp-for="Pizza.Descrizione" rows="10" class="d-block w-100"></textarea>
+                    <span asp-validation-for="Pizza.Descrizione" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <strong>Immagine:</strong>
+                    <input asp-for="Pizza.Image" class="d-block w-100" />
+                    <span asp-validation-for="Pizza.Image" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <strong>Prezzo:</strong>
+                    <textarea asp-for="Pizza.Prezzo" rows="10" class="d-block w-100"></textarea>
+                    <span asp-validation-for="Pizza.Prezzo" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <select asp-for="Pizza.CategoriaId" rows="10" class="d-block w-100">
+                        <option value=""></option>
+                        @foreach (Categoria categoria in Model.Categorie)
+                        {
+                            @if (Model.Pizza.CategoriaId == categoria.Id)
+                            {
+                                <option value="@categoria.Id" selected>@categoria.Name</option>
+                            }
+                            else
+                            {
+                                <option value="@categoria.Id">@categoria.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <strong>Ingredienti:</strong>
+                    <select asp-for="SelectedIngredientiId"
+                            multiple="multiple"
+                            size="10"
+                            class="form-control mb-2 mr-sm-2 ml-sm-3 leftList"
+                            asp-items="@Model.Ingredienti">
+                    </select>
+                </div>
+                <div class="text-end">
+                    <input type="submit" class="btn btn-small btn-success" value="Aggiorna">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
